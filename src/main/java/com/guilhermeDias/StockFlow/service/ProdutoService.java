@@ -1,13 +1,11 @@
 package com.guilhermeDias.StockFlow.service;
 
-import com.guilhermeDias.StockFlow.dto.ProdutoDTO;
 import com.guilhermeDias.StockFlow.entity.Produto;
 import com.guilhermeDias.StockFlow.exception.ProdutoNaoEncontradoException;
 import com.guilhermeDias.StockFlow.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProdutoService {
@@ -26,6 +24,10 @@ public class ProdutoService {
     public Produto buscarPorId(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ProdutoNaoEncontradoException("Produto não encontrado"));
+    }
+
+    public List<Produto> listarProdutosPorCategoria(String categoria) {
+        return repository.findByCategoriaIgnoreCase(categoria);
     }
 
     public Produto atualizar(Long id, Produto produto) {

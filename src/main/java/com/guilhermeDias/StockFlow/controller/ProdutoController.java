@@ -1,6 +1,7 @@
 package com.guilhermeDias.StockFlow.controller;
 
-import com.guilhermeDias.StockFlow.dto.ProdutoDTO;
+import com.guilhermeDias.StockFlow.dto.ProdutoRequestDTO;
+import com.guilhermeDias.StockFlow.dto.ProdutoResponseDTO;
 import com.guilhermeDias.StockFlow.entity.Produto;
 import com.guilhermeDias.StockFlow.mapper.ProdutoMapper;
 import com.guilhermeDias.StockFlow.service.ProdutoService;
@@ -12,12 +13,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
+//@Profile("dev")
 @Tag(name = "Produtos", description = "Controller para gerenciamento de produtos")
 @RestController
 @RequestMapping("/produtos")
@@ -28,10 +29,11 @@ public class ProdutoController {
 
     @Operation(summary = "Buscar todos os produtos cadastrados")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Produtos encontrados")
+            @ApiResponse(responseCode = "200", description = "Produtos encontrados"),
+            @ApiResponse(responseCode = "500", description = "Erro interno/servidor")
     })
     @GetMapping
-    public ResponseEntity<List<ProdutoDTO>> listarProdutos() {
+    public ResponseEntity<List<ProdutoResponseDTO>> listarProdutos() {
         return ResponseEntity.ok(ProdutoMapper.converterParaDTOList(service.listarTodos()));
     }
 
@@ -43,12 +45,27 @@ public class ProdutoController {
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<ProdutoDTO> buscarProdutoPorId(@PathVariable @Valid Long id) {
+    public ResponseEntity<ProdutoResponseDTO> buscarProdutoPorId(@PathVariable @Valid Long id) {
         Produto produto = service.buscarPorId(id);
 
-        ProdutoDTO produtoDTO = ProdutoMapper.converterParaDTO(produto);
+        ProdutoResponseDTO responseDTO = ProdutoMapper.converterParaDTO(produto);
 
-        return ResponseEntity.ok(produtoDTO);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @Operation(summary = "Buscar e listar todos os produtos cadastrados com a categoria informada")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Produtos encontrados"),
+            @ApiResponse(responseCode = "400", description = "Erro de validação."),
+            @ApiResponse(responseCode = "500", description = "Erro interno/servidor")
+    })
+    @GetMapping("/categorias/{categoria}")
+    public ResponseEntity<List<ProdutoResponseDTO>> listarProdutorPorCategoria(@PathVariable @Valid String categoria) {
+        List<Produto> produtos = service.listarProdutosPorCategoria(categoria);
+
+        List<ProdutoResponseDTO> responseDTO = ProdutoMapper.converterParaDTOList(produtos);
+
+        return ResponseEntity.ok(responseDTO);
     }
 
     @Operation(summary = "Cadastrar o produto no sistema.")
@@ -58,8 +75,8 @@ public class ProdutoController {
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor")
     })
     @PostMapping
-    public ResponseEntity<Void> salvarProduto(@RequestBody @Valid ProdutoDTO produtoDTO) {
-        Produto produto = ProdutoMapper.converterParaEntity(produtoDTO);
+    public ResponseEntity<Void> salvarProduto(@RequestBody @Valid ProdutoRequestDTO requestDTO) {
+        Produto produto = ProdutoMapper.converterParaEntity(requestDTO);
 
         service.salvar(produto);
 
@@ -74,14 +91,14 @@ public class ProdutoController {
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor")
     })
     @PutMapping("/{id}")
-    public ResponseEntity<ProdutoDTO> atualizarProduto(@PathVariable @Valid Long id, @RequestBody @Valid ProdutoDTO produtoDTO) {
-        Produto produto = ProdutoMapper.converterParaEntity(produtoDTO);
+    public ResponseEntity<ProdutoResponseDTO> atualizarProduto(@PathVariable @Valid Long id, @RequestBody @Valid ProdutoRequestDTO requestDTO) {
+        Produto produto = ProdutoMapper.converterParaEntity(requestDTO);
 
         Produto produtoAtualizado = service.atualizar(id, produto);
 
-        ProdutoDTO atualizadoDTO = ProdutoMapper.converterParaDTO(produtoAtualizado);
+        ProdutoResponseDTO responseDTO = ProdutoMapper.converterParaDTO(produtoAtualizado);
 
-        return ResponseEntity.ok(atualizadoDTO);
+        return ResponseEntity.ok(responseDTO);
     }
 
     @Operation(summary = "Deleta/Remove um produto do sistema pelo ID informado.")
