@@ -26,6 +26,4 @@ public class Estoque {
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
 
-
-
 }

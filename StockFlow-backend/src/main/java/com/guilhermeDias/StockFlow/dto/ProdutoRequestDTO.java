@@ -25,4 +25,7 @@ public class ProdutoRequestDTO {
     @NotBlank(message = "A categoria é obrigatória.")
     private String categoria;
 
+    @NotNull(message = "O estoque é obrigatório.")
+    private Long estoqueId;
+
 }

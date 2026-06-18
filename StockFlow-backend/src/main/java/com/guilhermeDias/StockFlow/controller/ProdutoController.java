@@ -2,8 +2,10 @@ package com.guilhermeDias.StockFlow.controller;
 
 import com.guilhermeDias.StockFlow.dto.ProdutoRequestDTO;
 import com.guilhermeDias.StockFlow.dto.ProdutoResponseDTO;
+import com.guilhermeDias.StockFlow.entity.Estoque;
 import com.guilhermeDias.StockFlow.entity.Produto;
 import com.guilhermeDias.StockFlow.mapper.ProdutoMapper;
+import com.guilhermeDias.StockFlow.service.EstoqueService;
 import com.guilhermeDias.StockFlow.service.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,11 +23,14 @@ import java.util.List;
 //@Profile("dev")
 @Tag(name = "Produtos", description = "Controller para gerenciamento de produtos")
 @RestController
-@RequestMapping("/produtos")
+@RequestMapping("/api/produtos")
 public class ProdutoController {
 
     @Autowired
     private ProdutoService service;
+
+    @Autowired
+    private EstoqueService estoqueService;
 
     @Operation(summary = "Buscar todos os produtos cadastrados")
     @ApiResponses(value = {
@@ -76,7 +81,9 @@ public class ProdutoController {
     })
     @PostMapping
     public ResponseEntity<Void> salvarProduto(@RequestBody @Valid ProdutoRequestDTO requestDTO) {
-        Produto produto = ProdutoMapper.converterParaEntity(requestDTO);
+        Estoque estoque = estoqueService.buscarEstoquePorId(requestDTO.getEstoqueId());
+
+        Produto produto = ProdutoMapper.converterParaEntity(requestDTO, estoque);
 
         service.salvar(produto);
 
@@ -92,7 +99,9 @@ public class ProdutoController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<ProdutoResponseDTO> atualizarProduto(@PathVariable @Valid Long id, @RequestBody @Valid ProdutoRequestDTO requestDTO) {
-        Produto produto = ProdutoMapper.converterParaEntity(requestDTO);
+        Estoque estoque = estoqueService.buscarEstoquePorId(requestDTO.getEstoqueId());
+
+        Produto produto = ProdutoMapper.converterParaEntity(requestDTO, estoque);
 
         Produto produtoAtualizado = service.atualizar(id, produto);
 

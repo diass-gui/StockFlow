@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/empresas")
+@RequestMapping("/api/empresas")
 @Profile("dev")
 public class EmpresaController {
 
