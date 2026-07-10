@@ -23,7 +23,7 @@ public class Empresa {
     private String nome;
 
     @Column(unique = true)
-    private String cpnj;
+    private String cnpj;
 
     @Column(unique = true)
     private String email;

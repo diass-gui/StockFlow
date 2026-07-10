@@ -11,5 +11,5 @@ public class EmpresaResponseDTO {
     private String nome;
     private String cnpj;
     private String email;
-    private Estoque estoque;
+    private Long estoqueId;
 }

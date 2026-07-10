@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 //@Profile("dev")
-@Tag(name = "Produtos", description = "Controller para gerenciamento de produtos")
+@Tag(name = "Produto", description = "Controller para gerenciamento de produtos.")
 @RestController
 @RequestMapping("/api/produtos")
 public class ProdutoController {

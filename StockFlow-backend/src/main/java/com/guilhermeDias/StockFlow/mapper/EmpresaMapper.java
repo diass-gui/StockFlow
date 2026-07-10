@@ -13,17 +13,14 @@ public class EmpresaMapper {
     public static EmpresaResponseDTO converterParaDTO(Empresa empresa) {
         EmpresaResponseDTO responseDTO = new EmpresaResponseDTO();
 
-//        responseDTO.setId(produto.getId());
-//        responseDTO.setNome(produto.getNome());
-//        responseDTO.setQuantidade(produto.getQuantidade());
-//        responseDTO.setPreco(produto.getPreco());
-//        responseDTO.setCategoria(produto.getCategoria());
-
         responseDTO.setId(empresa.getId());
         responseDTO.setNome(empresa.getNome());
-        responseDTO.setCnpj(empresa.getCpnj());
+        responseDTO.setCnpj(empresa.getCnpj());
         responseDTO.setEmail(empresa.getEmail());
-        responseDTO.setEstoque(empresa.getEstoque());
+
+        if(empresa.getEstoque() != null) {
+            responseDTO.setEstoqueId(empresa.getEstoque().getId());
+        }
 
         return responseDTO;
     }
@@ -32,9 +29,9 @@ public class EmpresaMapper {
         Empresa empresa = new Empresa();
 
         empresa.setNome(requestDTO.getNome());
-        empresa.setCpnj(requestDTO.getCnpj());
+        empresa.setCnpj(requestDTO.getCnpj());
         empresa.setEmail(requestDTO.getEmail());
-        empresa.setEstoque(requestDTO.getEstoque());
+//        empresa.setEstoque(requestDTO.getEstoque());
 
         return empresa;
     }

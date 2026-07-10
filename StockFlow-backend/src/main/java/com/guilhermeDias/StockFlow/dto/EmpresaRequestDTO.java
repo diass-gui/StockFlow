@@ -21,7 +21,4 @@ public class EmpresaRequestDTO {
     @NotBlank(message = "O e-mail é obrigatório.")
     private String email;
 
-    @NotNull(message = "O código do estoque é obrigatório")
-    private Estoque estoque;
-
 }
