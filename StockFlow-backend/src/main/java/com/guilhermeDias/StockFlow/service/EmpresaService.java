@@ -1,8 +1,7 @@
 package com.guilhermeDias.StockFlow.service;
 
 import com.guilhermeDias.StockFlow.entity.Empresa;
-import com.guilhermeDias.StockFlow.exception.EmpresaNaoEncontradoException;
-import com.guilhermeDias.StockFlow.exception.ProdutoNaoEncontradoException;
+import com.guilhermeDias.StockFlow.exception.EmpresaNaoEncontradaException;
 import com.guilhermeDias.StockFlow.repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,12 +23,8 @@ public class EmpresaService {
     public Empresa buscarPorId(Long id) {
         return repository.findById(id)
                 .orElseThrow(
-                        () -> new EmpresaNaoEncontradoException("Empresa não encontrada"));
+                        () -> new EmpresaNaoEncontradaException("Empresa não encontrada"));
     }
-//
-//    public Empresa atualizar(Empresa empresa, Long id) {
-//
-//    }
 
     public void deletar(Long id) {
         repository.deleteById(id);
