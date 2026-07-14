@@ -11,5 +11,5 @@ public class UsuarioResponseDTO {
     private String cpf;
     private String email;
     private String senha;
-    private Long empresaId;
+//    private Long empresaId;
 }
