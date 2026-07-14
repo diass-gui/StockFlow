@@ -1,8 +1,6 @@
 package com.guilhermeDias.StockFlow.dto;
 
-import com.guilhermeDias.StockFlow.entity.Estoque;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.br.CNPJ;
