@@ -1,12 +1,10 @@
 package com.guilhermeDias.StockFlow.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 @NoArgsConstructor
@@ -19,22 +17,21 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private String nome;
 
-    @CPF
-    @Column(nullable = false, unique = true)
+    @Column
     private String cpf;
 
-    @Email
-    @Column(nullable = false, unique = true)
+    @Column
     private String email;
 
-    @Column(nullable = false, unique = true)
+    @Column
     private String senha;
 
     @ManyToOne
-    @JoinColumn(name = "empresa_id", nullable = false)
+//    @JoinColumn(name = "empresa_id", nullable = false)
+    @JoinColumn(name = "empresa_id")
     private Empresa empresa;
 
 }
