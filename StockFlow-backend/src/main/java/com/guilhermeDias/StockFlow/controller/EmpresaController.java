@@ -60,7 +60,7 @@ public class EmpresaController {
     public ResponseEntity<EmpresaResponseDTO> cadastrarEmpresa(@RequestBody @Valid EmpresaRequestDTO requestDTO) {
         Empresa empresa = EmpresaMapper.converterParaEntity(requestDTO);
         service.salvar(empresa);
-        return ResponseEntity.status(201).build();
+        return ResponseEntity.status(201).body(EmpresaMapper.converterParaDTO(empresa));
     }
 
     @Operation(summary = "Deleta/Remove uma empresa do sistema pelo ID informado.")
