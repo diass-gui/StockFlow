@@ -1,5 +1,6 @@
 package com.guilhermeDias.StockFlow.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ public class EmpresaRequestDTO {
     @CNPJ(message = "Informe um CNPJ válido")
     private String cnpj;
 
+    @Email(message = "Informe um e-mail válido.")
     @NotBlank(message = "O e-mail é obrigatório.")
     private String email;
 
