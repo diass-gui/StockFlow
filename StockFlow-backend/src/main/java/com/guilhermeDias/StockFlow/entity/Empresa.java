@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,9 +29,11 @@ public class Empresa {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToOne(mappedBy = "empresa",
+    @OneToMany(
+            mappedBy = "empresa",
             cascade = CascadeType.REMOVE,
-            fetch = FetchType.LAZY)
-    private Estoque estoque;
+            fetch = FetchType.LAZY
+    )
+    private List<Estoque> estoques = new ArrayList<>();
 
 }

@@ -15,10 +15,6 @@ public class EmpresaMapper {
         responseDTO.setCnpj(empresa.getCnpj());
         responseDTO.setEmail(empresa.getEmail());
 
-        if(empresa.getEstoque() != null) {
-            responseDTO.setEstoqueId(empresa.getEstoque().getId());
-        }
-
         return responseDTO;
     }
 
