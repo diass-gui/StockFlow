@@ -1,15 +1,14 @@
 package com.guilhermeDias.StockFlow.service;
 
 import com.guilhermeDias.StockFlow.dto.EstoqueRequestDTO;
-import com.guilhermeDias.StockFlow.dto.EstoqueResponseDTO;
 import com.guilhermeDias.StockFlow.entity.Empresa;
 import com.guilhermeDias.StockFlow.entity.Estoque;
+import com.guilhermeDias.StockFlow.exception.EstoqueJaCadastradoException;
 import com.guilhermeDias.StockFlow.exception.EstoqueNaoEncontradoException;
+import com.guilhermeDias.StockFlow.mapper.EstoqueMapper;
 import com.guilhermeDias.StockFlow.repository.EstoqueRepository;
-import com.guilhermeDias.StockFlow.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -33,11 +32,12 @@ public class EstoqueService {
     }
 
     public void salvar(EstoqueRequestDTO requestDTO) {
-        Estoque estoque = new Estoque();
-        Empresa empresa = empresaService.buscarPorId(requestDTO.getEmpresaId());
+        if(repository.existsByNomeAndEmpresaId(requestDTO.getNome().trim(), requestDTO.getEmpresaId())) {
+            throw new EstoqueJaCadastradoException("Já existe um estoque cadastrado com os dados informados no sistema.");
+        }
 
-        estoque.setNome(requestDTO.getNome());
-        estoque.setEmpresa(empresa);
+        Empresa empresa = empresaService.buscarPorId(requestDTO.getEmpresaId());
+        Estoque estoque = EstoqueMapper.converterParaEntity(requestDTO, empresa);
 
         repository.save(estoque);
     }

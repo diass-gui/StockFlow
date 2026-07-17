@@ -17,11 +17,11 @@ public class Estoque {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "empresa_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empresa_id", nullable = false)
     private Empresa empresa;
 
-    @Column
+    @Column(nullable = false, length = 100)
     private String nome;
 
 }

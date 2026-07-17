@@ -28,9 +28,6 @@ public class EstoqueController {
     @Autowired
     private EstoqueService service;
 
-    @Autowired
-    private EmpresaService empresaService;
-
     @Operation(summary = "Buscar todos os estoques cadastrados")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Estoque encontrado"),
@@ -59,6 +56,7 @@ public class EstoqueController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Estoque foi cadastrado."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
+            @ApiResponse(responseCode = "409", description = "Estoque já cadastrado no sistema."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor")
     })
     @PostMapping
@@ -77,7 +75,6 @@ public class EstoqueController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removerEstoque(@Valid @PathVariable Long id) {
         service.deletar(id);
-
         return ResponseEntity.status(204).build();
     }
 
