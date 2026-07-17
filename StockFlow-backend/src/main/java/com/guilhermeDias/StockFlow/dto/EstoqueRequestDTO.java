@@ -5,15 +5,14 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 public class EstoqueRequestDTO {
 
+    @NotBlank(message = "O nome é obrigatório.")
+    private String nome;
+
     @NotNull(message = "A empresa é obrigatória.")
     private Long empresaId;
-
-    private List<Long> produtosId;
 
 }

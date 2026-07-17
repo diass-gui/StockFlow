@@ -13,12 +13,8 @@ public class EstoqueMapper {
         EstoqueResponseDTO responseDTO = new EstoqueResponseDTO();
 
         responseDTO.setId(estoque.getId());
+        responseDTO.setNome(estoque.getNome());
         responseDTO.setEmpresaId(estoque.getEmpresa().getId());
-        responseDTO.setProdutosId(
-                estoque.getProdutos().stream()
-                        .map(produto -> produto.getId())
-                        .toList()
-        );
 
         return responseDTO;
     }
@@ -26,6 +22,7 @@ public class EstoqueMapper {
     public static Estoque converterParaEntity(EstoqueRequestDTO requestDTO, Empresa empresa) {
         Estoque estoque = new Estoque();
 
+        estoque.setNome(requestDTO.getNome());
         estoque.setEmpresa(empresa);
 
         return estoque;

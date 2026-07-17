@@ -1,5 +1,8 @@
 package com.guilhermeDias.StockFlow.service;
 
+import com.guilhermeDias.StockFlow.dto.EstoqueRequestDTO;
+import com.guilhermeDias.StockFlow.dto.EstoqueResponseDTO;
+import com.guilhermeDias.StockFlow.entity.Empresa;
 import com.guilhermeDias.StockFlow.entity.Estoque;
 import com.guilhermeDias.StockFlow.exception.EstoqueNaoEncontradoException;
 import com.guilhermeDias.StockFlow.repository.EstoqueRepository;
@@ -15,6 +18,9 @@ public class EstoqueService {
     @Autowired
     private EstoqueRepository repository;
 
+    @Autowired
+    private EmpresaService empresaService;
+
     public List<Estoque> listar() {
         return repository.findAll();
     }
@@ -26,11 +32,18 @@ public class EstoqueService {
                 );
     }
 
-    public void salvar(Estoque estoque) {
+    public void salvar(EstoqueRequestDTO requestDTO) {
+        Estoque estoque = new Estoque();
+        Empresa empresa = empresaService.buscarPorId(requestDTO.getEmpresaId());
+
+        estoque.setNome(requestDTO.getNome());
+        estoque.setEmpresa(empresa);
+
         repository.save(estoque);
     }
 
     public void deletar(Long id) {
-        repository.deleteById(id);
+        Estoque estoque = buscarEstoquePorId(id);
+        repository.delete(estoque);
     }
 }

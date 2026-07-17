@@ -63,11 +63,7 @@ public class EstoqueController {
     })
     @PostMapping
     public ResponseEntity<Void> cadastrarEstoque(@RequestBody @Valid EstoqueRequestDTO requestDTO) {
-        Empresa empresa = empresaService.buscarPorId(requestDTO.getEmpresaId());
-        Estoque estoque = EstoqueMapper.converterParaEntity(requestDTO, empresa);
-
-        service.salvar(estoque);
-
+        service.salvar(requestDTO);
         return ResponseEntity.status(201).build();
     }
 
