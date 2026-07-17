@@ -10,5 +10,5 @@ public class EmpresaResponseDTO {
     private String nome;
     private String cnpj;
     private String email;
-    private Long estoqueId;
+//    private Long estoqueId; - futura implementação com novo endpoint
 }
