@@ -32,13 +32,13 @@ public class EstoqueService {
     }
 
     public void salvar(EstoqueRequestDTO requestDTO) {
-        if(repository.existsByNomeAndEmpresaId(requestDTO.getNome().trim(), requestDTO.getEmpresaId())) {
+        String nome = requestDTO.getNome().trim().replaceAll("\\s+", " ");
+        if(repository.existsByNomeAndEmpresaId(nome, requestDTO.getEmpresaId())) {
             throw new EstoqueJaCadastradoException("Já existe um estoque cadastrado com os dados informados no sistema.");
         }
 
         Empresa empresa = empresaService.buscarPorId(requestDTO.getEmpresaId());
         Estoque estoque = EstoqueMapper.converterParaEntity(requestDTO, empresa);
-
         repository.save(estoque);
     }
 
