@@ -1,8 +1,6 @@
 package com.guilhermeDias.StockFlow.dto;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.math.BigDecimal;
@@ -14,18 +12,11 @@ public class ProdutoRequestDTO {
     @NotBlank(message = "O nome é obrigatório")
     private String nome;
 
-    @NotNull(message = "A quantidade é obrigatória.")
-    @Min(value = 0, message = "Quantidade não pode ser menor que zero.")
-    private Integer quantidade;
-
     @NotNull(message = "O preço é obrigatório.")
-    @Min(value = 0, message = "O preço não pode ser menor que zero.")
+    @Positive(message = "O valor deve ser maior que 0.00")
     private BigDecimal preco;
 
     @NotBlank(message = "A categoria é obrigatória.")
     private String categoria;
-
-    @NotNull(message = "O estoque é obrigatório.")
-    private Long estoqueId;
 
 }
