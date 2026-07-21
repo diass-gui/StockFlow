@@ -1,4 +1,4 @@
-package com.guilhermeDias.StockFlow.exception;
+package com.guilhermeDias.StockFlow.exception.Empresa;
 
 public class CnpjJaCadastradoException extends RuntimeException {
     public CnpjJaCadastradoException() { super("CNPJ já cadastrado no sistema."); }

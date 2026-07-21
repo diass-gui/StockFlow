@@ -1,9 +1,10 @@
 package com.guilhermeDias.StockFlow.service;
 
+import com.guilhermeDias.StockFlow.dto.ProdutoUpdateDTO;
 import com.guilhermeDias.StockFlow.entity.Produto;
-import com.guilhermeDias.StockFlow.exception.CategoriaInexistenteException;
-import com.guilhermeDias.StockFlow.exception.ProdutoJaCadastradoException;
-import com.guilhermeDias.StockFlow.exception.ProdutoNaoEncontradoException;
+import com.guilhermeDias.StockFlow.exception.Produto.CategoriaInexistenteException;
+import com.guilhermeDias.StockFlow.exception.Produto.ProdutoJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.Produto.ProdutoNaoEncontradoException;
 import com.guilhermeDias.StockFlow.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,15 +45,16 @@ public class ProdutoService {
         return produtos;
     }
 
-    public Produto atualizar(Long id, Produto novoProduto) {
+    public Produto atualizar(Long id, ProdutoUpdateDTO novoProduto) {
         Produto produto = buscarPorId(id);
-        String novoNome = novoProduto.getNome().trim().replaceAll("\\s+", " ");
 
-        if (!produto.getNome().equalsIgnoreCase(novoNome) && !repository.existsByNome(novoNome)) {
-            throw new ProdutoNaoEncontradoException();
-        }
+//        String novoNome = novoProduto.getNome().trim().replaceAll("\\s+", " ");
+//
+//        if (!produto.getNome().equalsIgnoreCase(novoNome) && repository.existsByNome(novoNome)) {
+//            throw new ProdutoJaCadastradoException("Não é possível alterar o nome do produto para um nome já cadastrado.");
+//        }
 
-        produto.setNome(novoNome);
+//        produto.setNome(novoNome);
         produto.setPreco(novoProduto.getPreco());
         produto.setCategoria(novoProduto.getCategoria());
 

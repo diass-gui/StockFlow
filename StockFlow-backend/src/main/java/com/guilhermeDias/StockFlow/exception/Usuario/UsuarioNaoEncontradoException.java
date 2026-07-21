@@ -1,4 +1,4 @@
-package com.guilhermeDias.StockFlow.exception;
+package com.guilhermeDias.StockFlow.exception.Usuario;
 
 public class UsuarioNaoEncontradoException extends RuntimeException {
     public UsuarioNaoEncontradoException() { super("Usuário não encontrado."); }

@@ -2,6 +2,7 @@ package com.guilhermeDias.StockFlow.controller;
 
 import com.guilhermeDias.StockFlow.dto.ProdutoRequestDTO;
 import com.guilhermeDias.StockFlow.dto.ProdutoResponseDTO;
+import com.guilhermeDias.StockFlow.dto.ProdutoUpdateDTO;
 import com.guilhermeDias.StockFlow.entity.Estoque;
 import com.guilhermeDias.StockFlow.entity.Produto;
 import com.guilhermeDias.StockFlow.mapper.ProdutoMapper;
@@ -87,9 +88,9 @@ public class ProdutoController {
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor")
     })
     @PutMapping("/{id}")
-    public ResponseEntity<ProdutoResponseDTO> atualizarProduto(@PathVariable @Valid Long id, @RequestBody @Valid ProdutoRequestDTO requestDTO) {
-        Produto produto = ProdutoMapper.converterParaEntity(requestDTO);
-        Produto produtoAtualizado = service.atualizar(id, produto);
+    public ResponseEntity<ProdutoResponseDTO> atualizarProduto(@PathVariable @Valid Long id, @RequestBody @Valid ProdutoUpdateDTO updateDTO) {
+//        Produto produto = ProdutoMapper.converterParaEntity(requestDTO);
+        Produto produtoAtualizado = service.atualizar(id, updateDTO);
         ProdutoResponseDTO responseDTO = ProdutoMapper.converterParaDTO(produtoAtualizado);
         return ResponseEntity.ok(responseDTO);
     }

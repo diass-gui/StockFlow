@@ -1,8 +1,15 @@
 package com.guilhermeDias.StockFlow.exception;
 
-import com.guilhermeDias.StockFlow.entity.Usuario;
+import com.guilhermeDias.StockFlow.exception.Empresa.CnpjJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.Empresa.EmailJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.Empresa.EmpresaNaoEncontradaException;
+import com.guilhermeDias.StockFlow.exception.Estoque.EstoqueJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.Estoque.EstoqueNaoEncontradoException;
+import com.guilhermeDias.StockFlow.exception.Produto.CategoriaInexistenteException;
+import com.guilhermeDias.StockFlow.exception.Produto.ProdutoJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.Produto.ProdutoNaoEncontradoException;
+import com.guilhermeDias.StockFlow.exception.Usuario.UsuarioNaoEncontradoException;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.constraints.Email;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
