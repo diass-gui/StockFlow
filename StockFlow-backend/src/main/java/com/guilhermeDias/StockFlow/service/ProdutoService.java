@@ -1,8 +1,10 @@
 package com.guilhermeDias.StockFlow.service;
 
+import com.guilhermeDias.StockFlow.dto.ProdutoUpdateDTO;
 import com.guilhermeDias.StockFlow.entity.Produto;
-import com.guilhermeDias.StockFlow.exception.ProdutoNaoEncontradoException;
-import com.guilhermeDias.StockFlow.repository.EstoqueRepository;
+import com.guilhermeDias.StockFlow.exception.Produto.CategoriaInexistenteException;
+import com.guilhermeDias.StockFlow.exception.Produto.ProdutoJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.Produto.ProdutoNaoEncontradoException;
 import com.guilhermeDias.StockFlow.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,12 @@ public class ProdutoService {
     }
 
     public void salvar(Produto produto) {
+        String nome = produto.getNome().trim().replaceAll("\\s+", " ");
+        if(repository.existsByNome(nome)) {
+            throw new ProdutoJaCadastradoException("Já existe um produto cadastrado com o mesmo nome.");
+        }
+
+        produto.setNome(nome);
         repository.save(produto);
     }
 
@@ -28,23 +36,33 @@ public class ProdutoService {
     }
 
     public List<Produto> listarProdutosPorCategoria(String categoria) {
-        return repository.findByCategoriaIgnoreCase(categoria);
+        List<Produto> produtos = repository.findByCategoriaIgnoreCase(categoria);
+
+        if(produtos.isEmpty()) {
+            throw new CategoriaInexistenteException();
+        }
+
+        return produtos;
     }
 
-    public Produto atualizar(Long id, Produto produto) {
-        Produto novoProduto = repository.findById(id)
-                .orElseThrow(() -> new ProdutoNaoEncontradoException("Produto não encontrado."));
+    public Produto atualizar(Long id, ProdutoUpdateDTO novoProduto) {
+        Produto produto = buscarPorId(id);
 
-        novoProduto.setNome(produto.getNome());
-        novoProduto.setQuantidade(produto.getQuantidade());
-        novoProduto.setPreco(produto.getPreco());
-        novoProduto.setCategoria(produto.getCategoria());
-        novoProduto.setEstoque(produto.getEstoque());
+//        String novoNome = novoProduto.getNome().trim().replaceAll("\\s+", " ");
+//
+//        if (!produto.getNome().equalsIgnoreCase(novoNome) && repository.existsByNome(novoNome)) {
+//            throw new ProdutoJaCadastradoException("Não é possível alterar o nome do produto para um nome já cadastrado.");
+//        }
 
-        return repository.save(novoProduto);
+//        produto.setNome(novoNome);
+        produto.setPreco(novoProduto.getPreco());
+        produto.setCategoria(novoProduto.getCategoria());
+
+        return repository.save(produto);
     }
 
     public void remover(Long id) {
-        repository.deleteById(id);
+        Produto produto = buscarPorId(id);
+        repository.delete(produto);
     }
 }

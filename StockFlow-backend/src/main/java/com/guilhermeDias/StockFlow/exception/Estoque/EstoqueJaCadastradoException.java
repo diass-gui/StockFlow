@@ -1,4 +1,4 @@
-package com.guilhermeDias.StockFlow.exception;
+package com.guilhermeDias.StockFlow.exception.Estoque;
 
 public class EstoqueJaCadastradoException extends RuntimeException {
     public EstoqueJaCadastradoException() { super("Já existe um estoque com os dados informados."); }

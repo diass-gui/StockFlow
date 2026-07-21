@@ -1,4 +1,4 @@
-package com.guilhermeDias.StockFlow.exception;
+package com.guilhermeDias.StockFlow.exception.Produto;
 
 public class ProdutoNaoEncontradoException extends RuntimeException {
     public ProdutoNaoEncontradoException() { super("Produto não encontrado."); }

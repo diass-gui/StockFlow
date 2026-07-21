@@ -1,7 +1,7 @@
 package com.guilhermeDias.StockFlow.service;
 
 import com.guilhermeDias.StockFlow.entity.Usuario;
-import com.guilhermeDias.StockFlow.exception.UsuarioNaoEncontradoException;
+import com.guilhermeDias.StockFlow.exception.Usuario.UsuarioNaoEncontradoException;
 import com.guilhermeDias.StockFlow.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

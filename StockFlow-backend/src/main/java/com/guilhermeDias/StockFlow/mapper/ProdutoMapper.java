@@ -2,6 +2,7 @@ package com.guilhermeDias.StockFlow.mapper;
 
 import com.guilhermeDias.StockFlow.dto.ProdutoRequestDTO;
 import com.guilhermeDias.StockFlow.dto.ProdutoResponseDTO;
+import com.guilhermeDias.StockFlow.dto.ProdutoUpdateDTO;
 import com.guilhermeDias.StockFlow.entity.Estoque;
 import com.guilhermeDias.StockFlow.entity.Produto;
 import java.util.List;
@@ -13,22 +14,18 @@ public class ProdutoMapper {
 
         responseDTO.setId(produto.getId());
         responseDTO.setNome(produto.getNome());
-        responseDTO.setQuantidade(produto.getQuantidade());
         responseDTO.setPreco(produto.getPreco());
         responseDTO.setCategoria(produto.getCategoria());
-        responseDTO.setEstoqueId(produto.getEstoque().getId());
 
         return responseDTO;
     }
 
-    public static Produto converterParaEntity(ProdutoRequestDTO requestDTO, Estoque estoque) {
+    public static Produto converterParaEntity(ProdutoRequestDTO requestDTO) {
         Produto produto = new Produto();
 
         produto.setNome(requestDTO.getNome());
-        produto.setQuantidade(requestDTO.getQuantidade());
         produto.setPreco(requestDTO.getPreco());
         produto.setCategoria(requestDTO.getCategoria());
-        produto.setEstoque(estoque);
 
         return produto;
     }
