@@ -5,6 +5,9 @@ import com.guilhermeDias.StockFlow.exception.Empresa.EmailJaCadastradoException;
 import com.guilhermeDias.StockFlow.exception.Empresa.EmpresaNaoEncontradaException;
 import com.guilhermeDias.StockFlow.exception.Estoque.EstoqueJaCadastradoException;
 import com.guilhermeDias.StockFlow.exception.Estoque.EstoqueNaoEncontradoException;
+import com.guilhermeDias.StockFlow.exception.ItemEstoque.ItemEstoqueJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.ItemEstoque.ItemEstoqueNaoEncontradoException;
+import com.guilhermeDias.StockFlow.exception.ItemEstoque.QuantidadeInsuficienteException;
 import com.guilhermeDias.StockFlow.exception.Produto.CategoriaInexistenteException;
 import com.guilhermeDias.StockFlow.exception.Produto.ProdutoJaCadastradoException;
 import com.guilhermeDias.StockFlow.exception.Produto.ProdutoNaoEncontradoException;
@@ -141,6 +144,39 @@ public class GlobalExceptionHandler {
                 exception.getMessage(),
                 request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(ItemEstoqueNaoEncontradoException.class)
+    private ResponseEntity<ErrorResponse> ItemEstoqueNaoEncontradoHandler(ItemEstoqueNaoEncontradoException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(ItemEstoqueJaCadastradoException.class)
+    private ResponseEntity<ErrorResponse> ItemEstoqueJaCadastradoHandler(ItemEstoqueJaCadastradoException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(QuantidadeInsuficienteException.class)
+    private ResponseEntity<ErrorResponse> quantidadeInsuficienteHandler(QuantidadeInsuficienteException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
 }
