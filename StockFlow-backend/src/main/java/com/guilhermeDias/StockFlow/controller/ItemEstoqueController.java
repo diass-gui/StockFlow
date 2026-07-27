@@ -1,8 +1,8 @@
 package com.guilhermeDias.StockFlow.controller;
 
-import com.guilhermeDias.StockFlow.dto.ItemEstoqueRequestDTO;
-import com.guilhermeDias.StockFlow.dto.ItemEstoqueResponseDTO;
-import com.guilhermeDias.StockFlow.dto.MovimentacaoDTO;
+import com.guilhermeDias.StockFlow.dto.ItemEstoque.ItemEstoqueRequestDTO;
+import com.guilhermeDias.StockFlow.dto.ItemEstoque.ItemEstoqueResponseDTO;
+import com.guilhermeDias.StockFlow.dto.ItemEstoque.MovimentacaoDTO;
 import com.guilhermeDias.StockFlow.mapper.ItemEstoqueMapper;
 import com.guilhermeDias.StockFlow.service.ItemEstoqueService;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,7 +1,7 @@
 package com.guilhermeDias.StockFlow.mapper;
 
-import com.guilhermeDias.StockFlow.dto.ItemEstoqueRequestDTO;
-import com.guilhermeDias.StockFlow.dto.ItemEstoqueResponseDTO;
+import com.guilhermeDias.StockFlow.dto.ItemEstoque.ItemEstoqueRequestDTO;
+import com.guilhermeDias.StockFlow.dto.ItemEstoque.ItemEstoqueResponseDTO;
 import com.guilhermeDias.StockFlow.entity.Estoque;
 import com.guilhermeDias.StockFlow.entity.ItemEstoque;
 import com.guilhermeDias.StockFlow.entity.Produto;

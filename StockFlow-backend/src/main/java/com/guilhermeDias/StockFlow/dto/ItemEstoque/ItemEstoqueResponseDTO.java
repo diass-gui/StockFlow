@@ -1,4 +1,4 @@
-package com.guilhermeDias.StockFlow.dto;
+package com.guilhermeDias.StockFlow.dto.ItemEstoque;
 
 import lombok.Getter;
 import lombok.Setter;

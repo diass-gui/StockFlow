@@ -11,6 +11,7 @@ import com.guilhermeDias.StockFlow.exception.ItemEstoque.QuantidadeInsuficienteE
 import com.guilhermeDias.StockFlow.exception.Produto.CategoriaInexistenteException;
 import com.guilhermeDias.StockFlow.exception.Produto.ProdutoJaCadastradoException;
 import com.guilhermeDias.StockFlow.exception.Produto.ProdutoNaoEncontradoException;
+import com.guilhermeDias.StockFlow.exception.Usuario.UsuarioJaCadastradoException;
 import com.guilhermeDias.StockFlow.exception.Usuario.UsuarioNaoEncontradoException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -170,6 +171,17 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(QuantidadeInsuficienteException.class)
     private ResponseEntity<ErrorResponse> quantidadeInsuficienteHandler(QuantidadeInsuficienteException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(UsuarioJaCadastradoException.class)
+    private ResponseEntity<ErrorResponse> usuarioJaCadastradoHandler(UsuarioJaCadastradoException exception, HttpServletRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.CONFLICT.value(),

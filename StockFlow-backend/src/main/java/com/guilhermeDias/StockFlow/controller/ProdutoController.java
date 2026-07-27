@@ -1,12 +1,10 @@
 package com.guilhermeDias.StockFlow.controller;
 
-import com.guilhermeDias.StockFlow.dto.ProdutoRequestDTO;
-import com.guilhermeDias.StockFlow.dto.ProdutoResponseDTO;
-import com.guilhermeDias.StockFlow.dto.ProdutoUpdateDTO;
-import com.guilhermeDias.StockFlow.entity.Estoque;
+import com.guilhermeDias.StockFlow.dto.Produto.ProdutoRequestDTO;
+import com.guilhermeDias.StockFlow.dto.Produto.ProdutoResponseDTO;
+import com.guilhermeDias.StockFlow.dto.Produto.ProdutoUpdateDTO;
 import com.guilhermeDias.StockFlow.entity.Produto;
 import com.guilhermeDias.StockFlow.mapper.ProdutoMapper;
-import com.guilhermeDias.StockFlow.service.EstoqueService;
 import com.guilhermeDias.StockFlow.service.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -14,9 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

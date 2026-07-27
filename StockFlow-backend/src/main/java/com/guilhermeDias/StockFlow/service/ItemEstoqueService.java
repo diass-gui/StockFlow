@@ -1,7 +1,7 @@
 package com.guilhermeDias.StockFlow.service;
 
-import com.guilhermeDias.StockFlow.dto.ItemEstoqueRequestDTO;
-import com.guilhermeDias.StockFlow.dto.MovimentacaoDTO;
+import com.guilhermeDias.StockFlow.dto.ItemEstoque.ItemEstoqueRequestDTO;
+import com.guilhermeDias.StockFlow.dto.ItemEstoque.MovimentacaoDTO;
 import com.guilhermeDias.StockFlow.entity.Estoque;
 import com.guilhermeDias.StockFlow.entity.ItemEstoque;
 import com.guilhermeDias.StockFlow.entity.Produto;
