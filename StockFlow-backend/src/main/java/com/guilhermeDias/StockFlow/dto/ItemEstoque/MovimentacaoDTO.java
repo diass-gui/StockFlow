@@ -1,4 +1,4 @@
-package com.guilhermeDias.StockFlow.dto;
+package com.guilhermeDias.StockFlow.dto.ItemEstoque;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;

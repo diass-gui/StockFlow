@@ -1,6 +1,6 @@
 package com.guilhermeDias.StockFlow.service;
 
-import com.guilhermeDias.StockFlow.dto.ProdutoUpdateDTO;
+import com.guilhermeDias.StockFlow.dto.Produto.ProdutoUpdateDTO;
 import com.guilhermeDias.StockFlow.entity.Produto;
 import com.guilhermeDias.StockFlow.exception.Produto.CategoriaInexistenteException;
 import com.guilhermeDias.StockFlow.exception.Produto.ProdutoJaCadastradoException;

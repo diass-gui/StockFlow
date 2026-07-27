@@ -17,20 +17,22 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String nome;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String cpf;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @Column
+    @Column(nullable = false)
     private String senha;
 
-    @ManyToOne
-//    @JoinColumn(name = "empresa_id", nullable = false)
+    @Column(nullable = false)
+    private Boolean admin = false;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
 

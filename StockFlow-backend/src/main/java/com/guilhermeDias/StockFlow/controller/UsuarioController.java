@@ -1,8 +1,7 @@
 package com.guilhermeDias.StockFlow.controller;
 
-import com.guilhermeDias.StockFlow.dto.UsuarioRequestDTO;
-import com.guilhermeDias.StockFlow.dto.UsuarioResponseDTO;
-import com.guilhermeDias.StockFlow.entity.Usuario;
+import com.guilhermeDias.StockFlow.dto.Usuario.UsuarioRequestDTO;
+import com.guilhermeDias.StockFlow.dto.Usuario.UsuarioResponseDTO;
 import com.guilhermeDias.StockFlow.mapper.UsuarioMapper;
 import com.guilhermeDias.StockFlow.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,7 +53,7 @@ public class UsuarioController {
     })
     @PostMapping
     public ResponseEntity<Void> salvarUsuario(@RequestBody @Valid UsuarioRequestDTO requestDTO) {
-        service.salvar(UsuarioMapper.converterParaEntity(requestDTO));
+        service.salvar(requestDTO);
         return ResponseEntity.status(201).build();
     }
 
@@ -67,9 +66,7 @@ public class UsuarioController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioResponseDTO> atualizarUsuario(@PathVariable @Valid Long id, @RequestBody @Valid UsuarioRequestDTO requestDTO) {
-        Usuario usuario = UsuarioMapper.converterParaEntity(requestDTO);
-
-        return ResponseEntity.ok(UsuarioMapper.converterParaDTO(service.atualizarUsuario(id, usuario)));
+        return ResponseEntity.ok(UsuarioMapper.converterParaDTO(service.atualizarUsuario(id, requestDTO)));
     }
 
     @Operation(summary = "Deleta/Remove um usuário do sistema pelo ID informado.")

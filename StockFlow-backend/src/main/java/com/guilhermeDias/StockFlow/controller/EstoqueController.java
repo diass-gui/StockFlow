@@ -1,19 +1,14 @@
 package com.guilhermeDias.StockFlow.controller;
 
-import com.guilhermeDias.StockFlow.dto.EstoqueRequestDTO;
-import com.guilhermeDias.StockFlow.dto.EstoqueResponseDTO;
-import com.guilhermeDias.StockFlow.entity.Empresa;
-import com.guilhermeDias.StockFlow.entity.Estoque;
+import com.guilhermeDias.StockFlow.dto.Estoque.EstoqueRequestDTO;
+import com.guilhermeDias.StockFlow.dto.Estoque.EstoqueResponseDTO;
 import com.guilhermeDias.StockFlow.mapper.EstoqueMapper;
-import com.guilhermeDias.StockFlow.service.EmpresaService;
 import com.guilhermeDias.StockFlow.service.EstoqueService;
-import com.guilhermeDias.StockFlow.service.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

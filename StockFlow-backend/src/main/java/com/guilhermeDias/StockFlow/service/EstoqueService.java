@@ -1,6 +1,6 @@
 package com.guilhermeDias.StockFlow.service;
 
-import com.guilhermeDias.StockFlow.dto.EstoqueRequestDTO;
+import com.guilhermeDias.StockFlow.dto.Estoque.EstoqueRequestDTO;
 import com.guilhermeDias.StockFlow.entity.Empresa;
 import com.guilhermeDias.StockFlow.entity.Estoque;
 import com.guilhermeDias.StockFlow.exception.Estoque.EstoqueJaCadastradoException;

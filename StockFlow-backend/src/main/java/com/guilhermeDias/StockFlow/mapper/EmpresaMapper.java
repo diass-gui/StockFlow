@@ -1,7 +1,7 @@
 package com.guilhermeDias.StockFlow.mapper;
 
-import com.guilhermeDias.StockFlow.dto.EmpresaRequestDTO;
-import com.guilhermeDias.StockFlow.dto.EmpresaResponseDTO;
+import com.guilhermeDias.StockFlow.dto.Empresa.EmpresaRequestDTO;
+import com.guilhermeDias.StockFlow.dto.Empresa.EmpresaResponseDTO;
 import com.guilhermeDias.StockFlow.entity.Empresa;
 import java.util.List;
 

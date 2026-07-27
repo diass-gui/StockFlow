@@ -1,4 +1,4 @@
-package com.guilhermeDias.StockFlow.dto;
+package com.guilhermeDias.StockFlow.dto.Produto;
 
 import jakarta.validation.constraints.*;
 import lombok.Getter;

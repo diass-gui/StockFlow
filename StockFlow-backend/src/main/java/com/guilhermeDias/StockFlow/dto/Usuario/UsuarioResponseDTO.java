@@ -1,4 +1,4 @@
-package com.guilhermeDias.StockFlow.dto;
+package com.guilhermeDias.StockFlow.dto.Usuario;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +10,6 @@ public class UsuarioResponseDTO {
     private String nome;
     private String cpf;
     private String email;
-    private String senha;
-//    private Long empresaId;
+    private Boolean admin;
+    private Long empresaId;
 }
