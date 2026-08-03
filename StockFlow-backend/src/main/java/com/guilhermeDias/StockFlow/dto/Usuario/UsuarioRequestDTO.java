@@ -1,5 +1,6 @@
 package com.guilhermeDias.StockFlow.dto.Usuario;
 
+import com.guilhermeDias.StockFlow.entity.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -24,6 +25,9 @@ public class UsuarioRequestDTO {
     @NotBlank(message = "A senha é obrigatória.")
     @Size(min = 8, message = "A senha deve ter pelo menos 8 caracteres.")
     private String senha;
+
+    @NotBlank(message = "A role é obrigatória.")
+    private UserRole role;
 
     @NotNull(message = "A empresa é obrigatória.")
     private Long empresaId;
