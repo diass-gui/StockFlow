@@ -36,7 +36,6 @@ public class UsuarioService {
         }
 
         Usuario usuario = UsuarioMapper.converterParaEntity(requestDTO, empresaService.buscarPorId(requestDTO.getEmpresaId()));
-
         repository.save(usuario);
     }
 

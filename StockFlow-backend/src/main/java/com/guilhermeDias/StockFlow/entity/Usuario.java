@@ -46,7 +46,7 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
 
-    public Usuario(String nome, String cpf, String email, String senha, UserRole role, Empresa empresa) {
+    public Usuario(String nome, String cpf, String email, String senha, UserRole role) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
