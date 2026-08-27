@@ -15,7 +15,6 @@ public class UsuarioMapper {
         usuario.setCpf(requestDTO.getCpf());
         usuario.setEmail(requestDTO.getEmail());
         usuario.setSenha(requestDTO.getSenha());
-        usuario.setRole(requestDTO.getRole());
         usuario.setEmpresa(empresa);
 
         return usuario;

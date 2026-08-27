@@ -45,40 +45,16 @@ public class UsuarioController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    @Operation(summary = "Cadastrar o usuário no sistema.")
+    @Operation(summary = "Desativa um usuário do sistema pelo ID informado.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Usuário foi cadastrado."),
-            @ApiResponse(responseCode = "400", description = "Erro de validação."),
-            @ApiResponse(responseCode = "500", description = "Erro interno/Servidor.")
-    })
-    @PostMapping
-    public ResponseEntity<Void> salvarUsuario(@RequestBody @Valid UsuarioRequestDTO requestDTO) {
-        service.salvar(requestDTO);
-        return ResponseEntity.status(201).build();
-    }
-
-    @Operation(summary = "Atualiza o usuário conforme o ID e o JSON contendo os dados atualizados.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "O usuário foi atualizado."),
+            @ApiResponse(responseCode = "204", description = "Usuário desativado com sucesso."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor.")
     })
-    @PutMapping("/{id}")
-    public ResponseEntity<UsuarioResponseDTO> atualizarUsuario(@PathVariable @Valid Long id, @RequestBody @Valid UsuarioRequestDTO requestDTO) {
-        return ResponseEntity.ok(UsuarioMapper.converterParaDTO(service.atualizarUsuario(id, requestDTO)));
-    }
-
-    @Operation(summary = "Deleta/Remove um usuário do sistema pelo ID informado.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Usuário removido com sucesso."),
-            @ApiResponse(responseCode = "400", description = "Erro de validação."),
-            @ApiResponse(responseCode = "404", description = "Usuário não encontrado."),
-            @ApiResponse(responseCode = "500", description = "Erro interno/Servidor.")
-    })
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirUsuario(@PathVariable @Valid Long id) {
-        service.removerUsuario(id);
+    @PatchMapping("/{id}/desativar")
+    public ResponseEntity<Void> desativarUsuario(@PathVariable @Valid Long id) {
+        service.desativarUsuario(id);
         return ResponseEntity.status(204).build();
     }
 
