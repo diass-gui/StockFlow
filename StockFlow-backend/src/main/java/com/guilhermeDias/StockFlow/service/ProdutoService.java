@@ -47,14 +47,6 @@ public class ProdutoService {
 
     public Produto atualizar(Long id, ProdutoUpdateDTO novoProduto) {
         Produto produto = buscarPorId(id);
-
-//        String novoNome = novoProduto.getNome().trim().replaceAll("\\s+", " ");
-//
-//        if (!produto.getNome().equalsIgnoreCase(novoNome) && repository.existsByNome(novoNome)) {
-//            throw new ProdutoJaCadastradoException("Não é possível alterar o nome do produto para um nome já cadastrado.");
-//        }
-
-//        produto.setNome(novoNome);
         produto.setPreco(novoProduto.getPreco());
         produto.setCategoria(novoProduto.getCategoria());
 

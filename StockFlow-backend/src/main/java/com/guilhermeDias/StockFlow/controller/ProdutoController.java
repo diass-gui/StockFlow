@@ -85,7 +85,6 @@ public class ProdutoController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<ProdutoResponseDTO> atualizarProduto(@PathVariable @Valid Long id, @RequestBody @Valid ProdutoUpdateDTO updateDTO) {
-//        Produto produto = ProdutoMapper.converterParaEntity(requestDTO);
         Produto produtoAtualizado = service.atualizar(id, updateDTO);
         ProdutoResponseDTO responseDTO = ProdutoMapper.converterParaDTO(produtoAtualizado);
         return ResponseEntity.ok(responseDTO);
