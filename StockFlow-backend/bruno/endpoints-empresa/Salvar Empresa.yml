@@ -1,0 +1,23 @@
+info:
+  name: Salvar Empresa
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: http://localhost:8080/api/empresas
+  body:
+    type: json
+    data: |-
+      {
+        "nome": "empresa",
+        "cnpj": "90.637.642/0001-99",
+        "email": "empresa"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

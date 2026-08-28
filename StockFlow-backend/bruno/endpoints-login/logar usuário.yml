@@ -1,0 +1,22 @@
+info:
+  name: logar usuário
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://localhost:8080/api/auth/login
+  body:
+    type: json
+    data: |-
+      {
+        "email": "gui@teste_admin.com",
+        "password": "132@fof$B1G21."
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: true
