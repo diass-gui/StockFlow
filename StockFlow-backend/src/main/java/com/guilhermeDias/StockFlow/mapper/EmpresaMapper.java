@@ -1,11 +1,8 @@
 package com.guilhermeDias.StockFlow.mapper;
 
-import com.guilhermeDias.StockFlow.dto.EmpresaRequestDTO;
-import com.guilhermeDias.StockFlow.dto.EmpresaResponseDTO;
-import com.guilhermeDias.StockFlow.dto.ProdutoRequestDTO;
-import com.guilhermeDias.StockFlow.dto.ProdutoResponseDTO;
+import com.guilhermeDias.StockFlow.dto.Empresa.EmpresaRequestDTO;
+import com.guilhermeDias.StockFlow.dto.Empresa.EmpresaResponseDTO;
 import com.guilhermeDias.StockFlow.entity.Empresa;
-import com.guilhermeDias.StockFlow.entity.Produto;
 import java.util.List;
 
 public class EmpresaMapper {
@@ -18,10 +15,6 @@ public class EmpresaMapper {
         responseDTO.setCnpj(empresa.getCnpj());
         responseDTO.setEmail(empresa.getEmail());
 
-        if(empresa.getEstoque() != null) {
-            responseDTO.setEstoqueId(empresa.getEstoque().getId());
-        }
-
         return responseDTO;
     }
 
@@ -31,7 +24,6 @@ public class EmpresaMapper {
         empresa.setNome(requestDTO.getNome());
         empresa.setCnpj(requestDTO.getCnpj());
         empresa.setEmail(requestDTO.getEmail());
-//        empresa.setEstoque(requestDTO.getEstoque());
 
         return empresa;
     }

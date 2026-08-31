@@ -1,8 +1,9 @@
 package com.guilhermeDias.StockFlow.service;
 
 import com.guilhermeDias.StockFlow.entity.Empresa;
-import com.guilhermeDias.StockFlow.exception.EmpresaNaoEncontradoException;
-import com.guilhermeDias.StockFlow.exception.ProdutoNaoEncontradoException;
+import com.guilhermeDias.StockFlow.exception.Empresa.CnpjJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.Empresa.EmailJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.Empresa.EmpresaNaoEncontradaException;
 import com.guilhermeDias.StockFlow.repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,22 +18,25 @@ public class EmpresaService {
         return repository.findAll();
     }
 
-    public void salvar(Empresa empresa) {
-        repository.save(empresa);
+    public Empresa salvar(Empresa empresa) {
+        if(repository.existsByCnpj(empresa.getCnpj())) {
+            throw new CnpjJaCadastradoException();
+        }
+        if(repository.existsByEmail(empresa.getEmail())) {
+            throw new EmailJaCadastradoException();
+        }
+        return repository.save(empresa);
     }
 
     public Empresa buscarPorId(Long id) {
         return repository.findById(id)
                 .orElseThrow(
-                        () -> new EmpresaNaoEncontradoException("Empresa não encontrada"));
+                        () -> new EmpresaNaoEncontradaException("Empresa não encontrada"));
     }
-//
-//    public Empresa atualizar(Empresa empresa, Long id) {
-//
-//    }
 
     public void deletar(Long id) {
-        repository.deleteById(id);
+        Empresa empresa = buscarPorId(id);
+        repository.delete(empresa);
     }
 
 }

@@ -1,19 +1,14 @@
 package com.guilhermeDias.StockFlow.controller;
 
-import com.guilhermeDias.StockFlow.dto.EstoqueRequestDTO;
-import com.guilhermeDias.StockFlow.dto.EstoqueResponseDTO;
-import com.guilhermeDias.StockFlow.entity.Empresa;
-import com.guilhermeDias.StockFlow.entity.Estoque;
+import com.guilhermeDias.StockFlow.dto.Estoque.EstoqueRequestDTO;
+import com.guilhermeDias.StockFlow.dto.Estoque.EstoqueResponseDTO;
 import com.guilhermeDias.StockFlow.mapper.EstoqueMapper;
-import com.guilhermeDias.StockFlow.service.EmpresaService;
 import com.guilhermeDias.StockFlow.service.EstoqueService;
-import com.guilhermeDias.StockFlow.service.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +22,6 @@ public class EstoqueController {
 
     @Autowired
     private EstoqueService service;
-
-    @Autowired
-    private EmpresaService empresaService;
 
     @Operation(summary = "Buscar todos os estoques cadastrados")
     @ApiResponses(value = {
@@ -59,15 +51,13 @@ public class EstoqueController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Estoque foi cadastrado."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
+            @ApiResponse(responseCode = "403", description = "Erro de autorização."),
+            @ApiResponse(responseCode = "409", description = "Estoque já cadastrado no sistema."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor")
     })
     @PostMapping
     public ResponseEntity<Void> cadastrarEstoque(@RequestBody @Valid EstoqueRequestDTO requestDTO) {
-        Empresa empresa = empresaService.buscarPorId(requestDTO.getEmpresaId());
-        Estoque estoque = EstoqueMapper.converterParaEntity(requestDTO, empresa);
-
-        service.salvar(estoque);
-
+        service.salvar(requestDTO);
         return ResponseEntity.status(201).build();
     }
 
@@ -75,13 +65,13 @@ public class EstoqueController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Estoque removido com sucesso."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
+            @ApiResponse(responseCode = "403", description = "Erro de autorização."),
             @ApiResponse(responseCode = "404", description = "Estoque não encontrado."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor.")
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removerEstoque(@Valid @PathVariable Long id) {
         service.deletar(id);
-
         return ResponseEntity.status(204).build();
     }
 

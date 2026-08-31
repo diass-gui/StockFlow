@@ -1,9 +1,8 @@
 package com.guilhermeDias.StockFlow.controller;
 
-import com.guilhermeDias.StockFlow.dto.EmpresaRequestDTO;
-import com.guilhermeDias.StockFlow.dto.EmpresaResponseDTO;
+import com.guilhermeDias.StockFlow.dto.Empresa.EmpresaRequestDTO;
+import com.guilhermeDias.StockFlow.dto.Empresa.EmpresaResponseDTO;
 import com.guilhermeDias.StockFlow.entity.Empresa;
-import com.guilhermeDias.StockFlow.entity.Produto;
 import com.guilhermeDias.StockFlow.mapper.EmpresaMapper;
 import com.guilhermeDias.StockFlow.service.EmpresaService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,9 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -54,13 +51,13 @@ public class EmpresaController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Empresa foi cadastrada."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
+            @ApiResponse(responseCode = "403", description = "Erro de autorização."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor")
     })
     @PostMapping
     public ResponseEntity<EmpresaResponseDTO> cadastrarEmpresa(@RequestBody @Valid EmpresaRequestDTO requestDTO) {
         Empresa empresa = EmpresaMapper.converterParaEntity(requestDTO);
-        service.salvar(empresa);
-        return ResponseEntity.status(201).build();
+        return ResponseEntity.status(201).body(EmpresaMapper.converterParaDTO(service.salvar(empresa)));
     }
 
     @Operation(summary = "Deleta/Remove uma empresa do sistema pelo ID informado.")
@@ -68,6 +65,7 @@ public class EmpresaController {
             @ApiResponse(responseCode = "204", description = "Empresa removida com sucesso."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
             @ApiResponse(responseCode = "404", description = "Empresa não encontrada."),
+            @ApiResponse(responseCode = "409", description = "Erro de autorização."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor.")
     })
     @DeleteMapping("/{id}")

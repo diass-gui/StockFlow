@@ -1,0 +1,26 @@
+info:
+  name: registrar usuário
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:8080/api/auth/register
+  body:
+    type: json
+    data: |-
+      {
+        "nome": "teste",
+        "cpf": "cpf-teste",
+        "email": "email-teste",
+        "senha": "teste-senha",
+        "empresaId": 1
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: true

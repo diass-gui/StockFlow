@@ -1,0 +1,15 @@
+info:
+  name: Remove uma empresa pelo ID
+  type: http
+  seq: 11
+
+http:
+  method: DELETE
+  url: http://localhost:8080/api/empresas/1
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

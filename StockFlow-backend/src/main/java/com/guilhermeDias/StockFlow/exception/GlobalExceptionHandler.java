@@ -1,0 +1,194 @@
+package com.guilhermeDias.StockFlow.exception;
+
+import com.guilhermeDias.StockFlow.exception.Empresa.CnpjJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.Empresa.EmailJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.Empresa.EmpresaNaoEncontradaException;
+import com.guilhermeDias.StockFlow.exception.Estoque.EstoqueJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.Estoque.EstoqueNaoEncontradoException;
+import com.guilhermeDias.StockFlow.exception.ItemEstoque.ItemEstoqueJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.ItemEstoque.ItemEstoqueNaoEncontradoException;
+import com.guilhermeDias.StockFlow.exception.ItemEstoque.QuantidadeInsuficienteException;
+import com.guilhermeDias.StockFlow.exception.Produto.CategoriaInexistenteException;
+import com.guilhermeDias.StockFlow.exception.Produto.ProdutoJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.Produto.ProdutoNaoEncontradoException;
+import com.guilhermeDias.StockFlow.exception.Usuario.UsuarioJaCadastradoException;
+import com.guilhermeDias.StockFlow.exception.Usuario.UsuarioNaoEncontradoException;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ProdutoNaoEncontradoException.class)
+    private ResponseEntity<ErrorResponse> produtoNaoEncontradoHandler(ProdutoNaoEncontradoException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(EstoqueNaoEncontradoException.class)
+    private ResponseEntity<ErrorResponse> estoqueNaoEncontradoHandler(EstoqueNaoEncontradoException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(EmpresaNaoEncontradaException.class)
+    private ResponseEntity<ErrorResponse> empresaNaoEncontradaHandler(EmpresaNaoEncontradaException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    private ResponseEntity<ErrorResponse> erroValidacaoHandler(MethodArgumentNotValidException exception, HttpServletRequest request) {
+        Map<String, String> erros = new HashMap<>();
+        exception.getBindingResult()
+                .getFieldErrors()
+                .forEach(fieldError ->
+                        erros.put(
+                                fieldError.getField(),
+                                fieldError.getDefaultMessage())
+                );
+        ValidationErrorResponse validationError = new ValidationErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                "Erro de validação",
+                request.getRequestURI(),
+                erros
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationError);
+    }
+
+    @ExceptionHandler(UsuarioNaoEncontradoException.class)
+    private ResponseEntity<ErrorResponse> usuarioNaoEncontradoHandler(UsuarioNaoEncontradoException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(CnpjJaCadastradoException.class)
+    private ResponseEntity<ErrorResponse> cnpjJaCadastradoHandler(CnpjJaCadastradoException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(EmailJaCadastradoException.class)
+    private ResponseEntity<ErrorResponse> emailJaCadastradoHandler(EmailJaCadastradoException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(EstoqueJaCadastradoException.class)
+    private ResponseEntity<ErrorResponse> estoqueJaCadastradoHandler(EstoqueJaCadastradoException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(ProdutoJaCadastradoException.class)
+    private ResponseEntity<ErrorResponse> produtoJaCadastradoHandler(ProdutoJaCadastradoException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(CategoriaInexistenteException.class)
+    private ResponseEntity<ErrorResponse> categoriaInexistenteHandler(CategoriaInexistenteException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(ItemEstoqueNaoEncontradoException.class)
+    private ResponseEntity<ErrorResponse> ItemEstoqueNaoEncontradoHandler(ItemEstoqueNaoEncontradoException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(ItemEstoqueJaCadastradoException.class)
+    private ResponseEntity<ErrorResponse> ItemEstoqueJaCadastradoHandler(ItemEstoqueJaCadastradoException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(QuantidadeInsuficienteException.class)
+    private ResponseEntity<ErrorResponse> quantidadeInsuficienteHandler(QuantidadeInsuficienteException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(UsuarioJaCadastradoException.class)
+    private ResponseEntity<ErrorResponse> usuarioJaCadastradoHandler(UsuarioJaCadastradoException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+}

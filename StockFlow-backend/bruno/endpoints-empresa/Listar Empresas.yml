@@ -1,0 +1,17 @@
+info:
+  name: Listar Empresas
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: http://localhost:8080/api/empresas
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6Imd1aUB0ZXN0ZV9hZG1pbi5jb20iLCJleHAiOjE3ODcxOTE2MjV9.WB3D3JTnPU3HoV4nbvqno6rsYTtD2BsiS7KgYp6TkAU
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

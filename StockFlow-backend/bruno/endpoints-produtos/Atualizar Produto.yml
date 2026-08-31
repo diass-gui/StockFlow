@@ -1,0 +1,23 @@
+info:
+  name: Atualizar Produto
+  type: http
+  seq: 6
+
+http:
+  method: PUT
+  url: http://localhost:8080/api/produtos/{id}
+  body:
+    type: json
+    data: |-
+      {
+        "preco": 69.99,
+        "categoria": "Acessórios"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
