@@ -11,7 +11,7 @@ http:
     data: |-
       {
         "nome": "empresa",
-        "cnpj": "90.637.642/0001-99",
+        "cnpj": "cnpj-empresa",
         "email": "empresa"
       }
   auth: inherit

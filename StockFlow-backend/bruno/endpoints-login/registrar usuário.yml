@@ -10,10 +10,10 @@ http:
     type: json
     data: |-
       {
-        "nome": "Guilherme",
-        "cpf": "273.446.740-25",
-        "email": "gui@teste_admin.com",
-        "senha": "132@fof$B1G21.",
+        "nome": "teste",
+        "cpf": "cpf-teste",
+        "email": "email-teste",
+        "senha": "teste-senha",
         "empresaId": 1
       }
   auth: inherit
