@@ -66,6 +66,7 @@ public class ProdutoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Produto foi cadastrado."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
+            @ApiResponse(responseCode = "403", description = "Erro de autorização."),
             @ApiResponse(responseCode = "409", description = "Produto já existe no sistema."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor")
     })
@@ -80,6 +81,7 @@ public class ProdutoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "O produto foi atualizado."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
+            @ApiResponse(responseCode = "403", description = "Erro de autorização."),
             @ApiResponse(responseCode = "404", description = "Produto não encontrado."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor")
     })
@@ -94,13 +96,12 @@ public class ProdutoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Produto removido com sucesso."),
             @ApiResponse(responseCode = "400", description = "Erro de validação"),
+            @ApiResponse(responseCode = "403", description = "Erro de autorização."),
             @ApiResponse(responseCode = "404", description = "Produto não encontrado"),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor")
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarProduto (
-            @Parameter(description = "ID do produto", example = "1")
-            @PathVariable @Valid Long id) {
+    public ResponseEntity<Void> deletarProduto (@PathVariable @Valid Long id) {
         service.remover(id);
         return ResponseEntity.status(204).build();
     }

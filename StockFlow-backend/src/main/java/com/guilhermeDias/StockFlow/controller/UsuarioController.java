@@ -49,6 +49,7 @@ public class UsuarioController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Usuário desativado com sucesso."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
+            @ApiResponse(responseCode = "403", description = "Erro de autorização."),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor.")
     })

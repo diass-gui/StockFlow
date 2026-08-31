@@ -38,6 +38,7 @@ public class AuthenticationController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuário logado com sucesso."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
+            @ApiResponse(responseCode = "403", description = "Erro de Autorização."),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor.")
     })

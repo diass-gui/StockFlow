@@ -51,6 +51,7 @@ public class EstoqueController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Estoque foi cadastrado."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
+            @ApiResponse(responseCode = "403", description = "Erro de autorização."),
             @ApiResponse(responseCode = "409", description = "Estoque já cadastrado no sistema."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor")
     })
@@ -64,6 +65,7 @@ public class EstoqueController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Estoque removido com sucesso."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
+            @ApiResponse(responseCode = "403", description = "Erro de autorização."),
             @ApiResponse(responseCode = "404", description = "Estoque não encontrado."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor.")
     })

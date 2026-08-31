@@ -51,6 +51,7 @@ public class EmpresaController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Empresa foi cadastrada."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
+            @ApiResponse(responseCode = "403", description = "Erro de autorização."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor")
     })
     @PostMapping
@@ -64,6 +65,7 @@ public class EmpresaController {
             @ApiResponse(responseCode = "204", description = "Empresa removida com sucesso."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
             @ApiResponse(responseCode = "404", description = "Empresa não encontrada."),
+            @ApiResponse(responseCode = "409", description = "Erro de autorização."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor.")
     })
     @DeleteMapping("/{id}")
