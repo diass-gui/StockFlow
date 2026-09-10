@@ -63,6 +63,8 @@ Empresa 1 ─── N Usuario
 
 `ItemEstoque` representa a associação entre um produto e um estoque, permitindo controlar a quantidade de determinado produto em cada estoque.
 
+<img width="1156" height="578" alt="DER-StockFlow-v2" src="https://github.com/user-attachments/assets/62b3f63b-5273-464d-b151-a4c92e667125" />
+
 ## Autenticação e autorização
 
 A V1 utiliza **Spring Security + JWT**.
