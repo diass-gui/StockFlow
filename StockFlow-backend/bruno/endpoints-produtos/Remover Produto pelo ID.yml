@@ -6,7 +6,9 @@ info:
 http:
   method: DELETE
   url: http://localhost:8080/api/produtos/remover/dois
-  auth: inherit
+  auth:
+    type: bearer
+    token:
 
 settings:
   encodeUrl: true

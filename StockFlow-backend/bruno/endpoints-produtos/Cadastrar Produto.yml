@@ -15,7 +15,9 @@ http:
         "preco": 49.90,
         "categoria": "Eletrônicos"
       }
-  auth: inherit
+  auth:
+    type: bearer
+    token:
 
 settings:
   encodeUrl: true
