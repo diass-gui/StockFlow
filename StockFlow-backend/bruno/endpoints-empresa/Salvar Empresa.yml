@@ -14,7 +14,9 @@ http:
         "cnpj": "cnpj-empresa",
         "email": "empresa"
       }
-  auth: inherit
+  auth:
+    type: bearer
+    token:
 
 settings:
   encodeUrl: true

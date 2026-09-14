@@ -6,7 +6,9 @@ info:
 http:
   method: GET
   url: http://localhost:8080/api/empresas/1
-  auth: inherit
+  auth:
+    type: bearer
+    token:
 
 settings:
   encodeUrl: true
