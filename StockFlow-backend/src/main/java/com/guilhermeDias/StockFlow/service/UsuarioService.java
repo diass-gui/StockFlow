@@ -1,6 +1,8 @@
 package com.guilhermeDias.StockFlow.service;
 
+import com.guilhermeDias.StockFlow.dto.Usuario.UsuarioUpdateDTO;
 import com.guilhermeDias.StockFlow.entity.Usuario;
+import com.guilhermeDias.StockFlow.exception.Usuario.UsuarioAtivoException;
 import com.guilhermeDias.StockFlow.exception.Usuario.UsuarioNaoEncontradoException;
 import com.guilhermeDias.StockFlow.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +29,15 @@ public class UsuarioService {
         repository.save(usuario);
     }
 
-    public void reativarUsuario(Long id) {
-        Usuario usuario = buscarPeloId(id);
+    public void reativarUsuario(UsuarioUpdateDTO updateDTO) {
+        Usuario usuario = repository.findByEmail(updateDTO.getEmail()).orElseThrow(
+                () -> new UsuarioNaoEncontradoException("O usuário informado não foi encontrado.")
+        );
+
+        if(usuario.isAtivo()) {
+            throw new UsuarioAtivoException("O usuário já está ativo no sistema.");
+        }
+
         usuario.setAtivo(true);
         repository.save(usuario);
     }
