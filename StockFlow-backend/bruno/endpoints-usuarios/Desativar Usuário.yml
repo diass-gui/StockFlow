@@ -5,10 +5,10 @@ info:
 
 http:
   method: PATCH
-  url: http://localhost:8080/api/usuarios/3/desativar
+  url: http://localhost:8080/api/usuarios/desativar
   auth:
     type: bearer
-    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6Imd1aUB0ZXN0ZV9hZG1pbi5jb20iLCJleHAiOjE3ODc4NDM2NzB9.wXHNFy0VrbIh84JCK7IKee_25Gp2efjiWyMDBmBxcJI
+    token:
 
 settings:
   encodeUrl: true

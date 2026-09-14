@@ -12,6 +12,7 @@ import com.guilhermeDias.StockFlow.exception.Produto.CategoriaInexistenteExcepti
 import com.guilhermeDias.StockFlow.exception.Produto.ProdutoJaCadastradoException;
 import com.guilhermeDias.StockFlow.exception.Produto.ProdutoNaoEncontradoException;
 import com.guilhermeDias.StockFlow.exception.Usuario.UsuarioAtivoException;
+import com.guilhermeDias.StockFlow.exception.Usuario.UsuarioDesativadoException;
 import com.guilhermeDias.StockFlow.exception.Usuario.UsuarioJaCadastradoException;
 import com.guilhermeDias.StockFlow.exception.Usuario.UsuarioNaoEncontradoException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -194,6 +195,17 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UsuarioAtivoException.class)
     private ResponseEntity<ErrorResponse> usuarioAtivoHandler(UsuarioAtivoException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(UsuarioDesativadoException.class)
+    private ResponseEntity<ErrorResponse> usuarioAtivoHandler(UsuarioDesativadoException exception, HttpServletRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.CONFLICT.value(),

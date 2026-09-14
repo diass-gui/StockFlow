@@ -54,9 +54,9 @@ public class UsuarioController {
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor.")
     })
-    @PatchMapping("/{id}/desativar")
-    public ResponseEntity<Void> desativarUsuario(@PathVariable @Valid Long id) {
-        service.desativarUsuario(id);
+    @PatchMapping("/desativar")
+    public ResponseEntity<Void> desativarUsuario(@RequestBody @Valid UsuarioUpdateDTO updateDTO) {
+        service.desativarUsuario(updateDTO);
         return ResponseEntity.status(204).build();
     }
 
