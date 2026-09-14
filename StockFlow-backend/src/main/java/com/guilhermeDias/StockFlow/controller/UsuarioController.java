@@ -2,6 +2,7 @@ package com.guilhermeDias.StockFlow.controller;
 
 import com.guilhermeDias.StockFlow.dto.Usuario.UsuarioRequestDTO;
 import com.guilhermeDias.StockFlow.dto.Usuario.UsuarioResponseDTO;
+import com.guilhermeDias.StockFlow.dto.Usuario.UsuarioUpdateDTO;
 import com.guilhermeDias.StockFlow.mapper.UsuarioMapper;
 import com.guilhermeDias.StockFlow.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -57,6 +58,20 @@ public class UsuarioController {
     public ResponseEntity<Void> desativarUsuario(@PathVariable @Valid Long id) {
         service.desativarUsuario(id);
         return ResponseEntity.status(204).build();
+    }
+
+    @Operation(summary = "Reativar um usuário do sistema pelo e-mail informado.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário reativado com sucesso."),
+            @ApiResponse(responseCode = "400", description = "Erro de validação."),
+            @ApiResponse(responseCode = "403", description = "Erro de autorização."),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado."),
+            @ApiResponse(responseCode = "500", description = "Erro interno/Servidor.")
+    })
+    @PatchMapping("/reativar")
+    public ResponseEntity<Void> reativarUsuario(@RequestBody @Valid UsuarioUpdateDTO updateDTO) {
+        service.reativarUsuario(updateDTO);
+        return ResponseEntity.status(200).build();
     }
 
 }

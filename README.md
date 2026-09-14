@@ -6,7 +6,7 @@ O projeto foi criado com o objetivo de aplicar, na prática, conceitos estudados
 
 > **Importante:** o StockFlow é um projeto de estudo. A V1 busca demonstrar a implementação das funcionalidades e dos conceitos propostos, e não pretende representar uma solução completa de gestão de estoque para uso empresarial em produção.
 
-## Funcionalidades da V1
+## Funcionalidades da aplicação
 
 - Cadastro e consulta de empresas;
 - Cadastro, consulta, atualização e remoção de produtos;
@@ -31,7 +31,6 @@ O projeto foi criado com o objetivo de aplicar, na prática, conceitos estudados
 - **Spring Security**
 - **JWT (Auth0 java-jwt)**
 - **MySQL**
-- **H2** (dependência disponível para o projeto)
 - **Bean Validation**
 - **Lombok**
 - **Springdoc OpenAPI / Swagger UI**
@@ -63,6 +62,8 @@ Empresa 1 ─── N Usuario
 ```
 
 `ItemEstoque` representa a associação entre um produto e um estoque, permitindo controlar a quantidade de determinado produto em cada estoque.
+
+<img width="1156" height="578" alt="DER-StockFlow-v2" src="https://github.com/user-attachments/assets/62b3f63b-5273-464d-b151-a4c92e667125" />
 
 ## Autenticação e autorização
 
