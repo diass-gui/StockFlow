@@ -19,6 +19,7 @@ O projeto foi criado com o objetivo de aplicar, na prática, conceitos estudados
 - Autenticação baseada em **JWT (JSON Web Token)**;
 - Autorização baseada nas roles `ADMIN` e `USER`;
 - Desativação de usuários por administradores, sem exclusão física do registro;
+- Reativação de usuários por administradores;
 - Usuário administrador inicial criado por seed;
 - Documentação da API com Swagger/OpenAPI.
 
@@ -99,7 +100,7 @@ Antes de executar o projeto, instale/configure:
 
 - **Java 21**;
 - **MySQL**;
-- Git.
+- **Git**.
 
 O projeto utiliza o Maven Wrapper, portanto não é necessário instalar o Maven manualmente.
 
@@ -118,7 +119,7 @@ Depois, configure os valores do seu ambiente.
 ### Variáveis do banco de dados
 
 ```env
-DB_URL=jdbc:mysql://localhost:3306/StockFlow
+DB_URL=jdbc:mysql://localhost:3306/database-sistena
 DB_USERNAME=seu-usuario-do-banco
 DB_PASSWORD=sua-senha-do-banco
 ```
@@ -128,6 +129,16 @@ DB_PASSWORD=sua-senha-do-banco
 ```env
 JWT_SECRET=sua-chave-secreta
 ```
+
+### Geração da chave secreta do JWT com OpenSSL
+
+Para gerar uma chave secreta forte e aleatória para a variável `JWT_SECRET`, utilize o OpenSSL:
+
+```bash
+openssl rand -base64 64
+```
+
+Copie o valor gerado para a variável `JWT_SECRET` no arquivo `.env`.
 
 A `JWT_SECRET` deve ser uma chave forte e aleatória. **Não publique o valor real no GitHub.**
 
@@ -249,7 +260,8 @@ http://localhost:8080/v3/api-docs
 | Itens de estoque | DELETE | `/api/itens-estoque/{id}` | ADMIN |
 | Usuários | GET | `/api/usuarios` | Autenticado |
 | Usuários | GET | `/api/usuarios/{id}` | Autenticado |
-| Desativação | PATCH | `/api/usuarios/{id}/desativar` | ADMIN |
+| Desativação | PATCH | `/api/usuarios/desativar` | ADMIN |
+| Reativação | PATCH | `/api/usuarios/reativar` | ADMIN |
 
 A documentação do Swagger é a referência mais completa para parâmetros, corpos de requisição, respostas e códigos HTTP de cada endpoint.
 
@@ -278,7 +290,6 @@ Para os próximos passos do StockFlow, estão previstas as seguintes evoluções
 - Integrar o backend com um front-end;
 - Containerizar backend, front-end e banco de dados utilizando Docker e Docker Compose;
 - Realizar uma análise de segurança com base no OWASP Top 10, identificando e corrigindo vulnerabilidades e fragilidades de implementação;
-- Implementar a funcionalidade de reativação de usuários;
 - Implementar testes automatizados com JUnit, Mockito e ferramentas relacionadas;
 - Aprimorar endpoints e regras de negócio envolvendo a role `ADMIN`;
 - Implementar isolamento de dados entre empresas;
