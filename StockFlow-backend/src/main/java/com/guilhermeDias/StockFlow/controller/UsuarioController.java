@@ -1,6 +1,5 @@
 package com.guilhermeDias.StockFlow.controller;
 
-import com.guilhermeDias.StockFlow.dto.Usuario.UsuarioRequestDTO;
 import com.guilhermeDias.StockFlow.dto.Usuario.UsuarioResponseDTO;
 import com.guilhermeDias.StockFlow.dto.Usuario.UsuarioUpdateDTO;
 import com.guilhermeDias.StockFlow.mapper.UsuarioMapper;
@@ -46,7 +45,7 @@ public class UsuarioController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    @Operation(summary = "Desativa um usuário do sistema pelo ID informado.")
+    @Operation(summary = "Desativar um usuário do sistema pelo e-mail informado.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Usuário desativado com sucesso."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),

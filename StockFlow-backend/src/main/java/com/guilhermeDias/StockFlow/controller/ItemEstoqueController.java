@@ -49,7 +49,7 @@ public class ItemEstoqueController {
 
     @Operation(summary = "Cadastrar um item no sistema.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "O item foi cadastrado."),
+            @ApiResponse(responseCode = "204", description = "O item foi cadastrado."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
             @ApiResponse(responseCode = "409", description = "Item já existente no sistema."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor")
@@ -74,7 +74,7 @@ public class ItemEstoqueController {
 
     @Operation(summary = "Realizar a movimentação de saída (diminuição de quantidade) de um item no sistema.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "A movimentação foi concluída com sucesso."),
+            @ApiResponse(responseCode = "204", description = "A movimentação foi concluída com sucesso."),
             @ApiResponse(responseCode = "400", description = "Erro de validação."),
             @ApiResponse(responseCode = "409", description = "Quantidade inferior a quantidade de retirada."),
             @ApiResponse(responseCode = "500", description = "Erro interno/Servidor")
