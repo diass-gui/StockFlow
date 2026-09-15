@@ -119,7 +119,7 @@ Depois, configure os valores do seu ambiente.
 ### Variáveis do banco de dados
 
 ```env
-DB_URL=jdbc:mysql://localhost:3306/database-sistena
+DB_URL=jdbc:mysql://localhost:3306/StockFlow
 DB_USERNAME=seu-usuario-do-banco
 DB_PASSWORD=sua-senha-do-banco
 ```
