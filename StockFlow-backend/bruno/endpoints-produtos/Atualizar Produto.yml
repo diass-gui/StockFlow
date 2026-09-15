@@ -13,7 +13,9 @@ http:
         "preco": 69.99,
         "categoria": "Acessórios"
       }
-  auth: inherit
+  auth:
+    type: bearer
+    token:
 
 settings:
   encodeUrl: true
