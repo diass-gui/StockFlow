@@ -6,9 +6,15 @@ info:
 http:
   method: PATCH
   url: http://localhost:8080/api/usuarios/reativar
+  body:
+    type: json
+    data: |-
+      {
+        "email": "teste@exemplo.com"
+      }
   auth:
     type: bearer
-    token:
+    token: ""
 
 settings:
   encodeUrl: true
