@@ -6,9 +6,15 @@ info:
 http:
   method: PATCH
   url: http://localhost:8080/api/usuarios/desativar
+  body:
+    type: json
+    data: |-
+      {
+        "email": "exemplo@email.com"
+      }
   auth:
     type: bearer
-    token:
+    token: ""
 
 settings:
   encodeUrl: true
